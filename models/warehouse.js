@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const WareHouseShema = new  mongoose.Shema(
+const WareHouseSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -18,4 +18,4 @@ const WareHouseShema = new  mongoose.Shema(
     },
 );
 
-export default mongoose.model('WareHouse', WareHouseShema);
+export default mongoose.model('WareHouse', WareHouseSchema);

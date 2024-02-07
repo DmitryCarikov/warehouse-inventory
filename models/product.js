@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+const Schema = mongoose.Schema;
+
 const ProductSchema = new mongoose.Schema(
     {
         name: {
@@ -29,9 +31,9 @@ const ProductSchema = new mongoose.Schema(
             type: Schema.Types.ObjectId,
             ref: 'StorageLocation',
         },
-        suplier: {
+        supplier: {
             type: Schema.Types.ObjectId,
-            ref: 'Suplier',
+            ref: 'Supplier',
         },
         wareHouse: {
             type: Schema.Types.ObjectId,

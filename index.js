@@ -3,6 +3,12 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import cors from 'cors';
 
+import {
+    handleValidationErrors,
+    allRolesAuth,
+    adminOnlyAuth,
+} from './utils/index.js';
+
 mongoose
     .connect('mongodb+srv://admin:Hesus2016@cluster0.vgtv5yo.mongodb.net/WareHouse')
     .then(() => console.log('DB OK'))

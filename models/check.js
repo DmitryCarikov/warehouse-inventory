@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const CheckShema = new mongoose.Schema(
+const CheckSchema = new mongoose.Schema(
     {
         products: [
             {
-                type: Schema.Types.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: 'Product',
             }
         ],
@@ -14,4 +14,4 @@ const CheckShema = new mongoose.Schema(
     },
 );
 
-export default mongoose.model('Check', CheckShema);
+export default mongoose.model('Check', CheckSchema);

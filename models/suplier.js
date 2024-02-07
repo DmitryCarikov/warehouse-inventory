@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const SuplierShema = new mongoose.Schema(
+const SupplierShema = new mongoose.Schema(
     {
         companyName: {
             type: String,
@@ -22,4 +22,4 @@ const SuplierShema = new mongoose.Schema(
     },
 );
 
-export default mongoose.model('Suplier', SuplierShema);
+export default mongoose.model('Supplier', SupplierShema);
