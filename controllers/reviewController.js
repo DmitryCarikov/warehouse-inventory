@@ -47,7 +47,6 @@ export const update = async (req, res) => {
             {
                 check: req.check,
                 text: req.body.text,
-                rating: req.body.rating,
             },
         );
         
