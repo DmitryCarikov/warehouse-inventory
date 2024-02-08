@@ -4,10 +4,21 @@ import multer from 'multer';
 import cors from 'cors';
 
 import {
-    handleValidationErrors,
     allRolesAuth,
     adminOnlyAuth,
+    handleValidationErrors,
 } from './utils/index.js';
+
+import {
+    userController,
+    checkController,
+    reviewController,
+    productController,
+    categoryContoller,
+    supplierController,
+    wareHouseController,
+    storageLocationController,
+} from './controllers/index.js';
 
 mongoose
     .connect('mongodb+srv://admin:Hesus2016@cluster0.vgtv5yo.mongodb.net/WareHouse')
