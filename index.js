@@ -20,6 +20,25 @@ import {
     storageLocationController,
 } from './controllers/index.js';
 
+import {
+    loginValidation,
+    registerValidation,
+    createWareHouseValidation,
+    updateWareHouseValidation,
+    createSupplierValidation,
+    updateSupplierValidation,
+    createStorageLocationValidation,
+    updateStorageLocationValidation,
+    createReviewValidation,
+    updateReviewValidation,
+    createProductValidation,
+    updateProductValidation,
+    createCheckValidation,
+    updateCheckValidation,
+    createCategoryValidation,
+    updateCategoryValidation,
+} from './validations.js'
+
 mongoose
     .connect('mongodb+srv://admin:Hesus2016@cluster0.vgtv5yo.mongodb.net/WareHouse')
     .then(() => console.log('DB OK'))
