@@ -122,4 +122,3 @@ export const updateCategoryValidation = [
         .notEmpty().withMessage('Description field, if provided, cannot be empty')
         .isLength({ min: 5, max: 200 }).withMessage('Description must be between 5 and 200 characters'),
 ];
-
