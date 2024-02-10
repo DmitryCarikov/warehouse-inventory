@@ -6,6 +6,10 @@ const StorageLocationShema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+        warehouse: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'WareHouse',
+        }
     },
     {
         timestamps: true,

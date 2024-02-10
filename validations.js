@@ -43,11 +43,12 @@ export const updateSupplierValidation = [
 
 export const createStorageLocationValidation = [
     body('shelfNumber', 'Shelf number is required and must be a number').notEmpty().isNumeric(),
+    body('wareHouse', 'Warehouse ID must be a valid MongoID').isMongoId(),
 ];
 
 export const updateStorageLocationValidation = [
-    param('id', 'Invalid storage location ID').isMongoId(),
     body('shelfNumber', 'Shelf number must be a number').optional().isNumeric(),
+    body('wareHouse', 'Warehouse ID must be a valid MongoID').optional().isMongoId(),
 ];
 
 export const createReviewValidation = [
