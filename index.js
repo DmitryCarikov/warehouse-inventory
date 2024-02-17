@@ -100,6 +100,7 @@ app.delete('/storage-location/delete/:id', adminOnlyAuth, storageLocationControl
 //reviews
 app.post('/review/create', allRolesAuth, createReviewValidation, handleValidationErrors, reviewController.create);
 app.delete('/review/delete/:id', adminOnlyAuth, reviewController.remove);
+app.get('/check/:id/reviews', allRolesAuth, reviewController.getAll);
 app.patch('/review/update/:id', adminOnlyAuth, updateReviewValidation, handleValidationErrors, reviewController.update);
 
 //prodocts
@@ -113,7 +114,6 @@ app.get('/products/category/:categoryId', allRolesAuth, productController.getByC
 //check
 app.post('/check/create', allRolesAuth, createCheckValidation, handleValidationErrors, checkController.create);
 app.get('/check', allRolesAuth, checkController.getAll);
-app.get('/check/:id/reviews', allRolesAuth, reviewController.getAll);
 app.get('/check/:id', allRolesAuth, checkController.getOne);
 app.patch('/check/update/:id', allRolesAuth, updateCheckValidation, handleValidationErrors, checkController.update);
 app.delete('/check/delete/:id', allRolesAuth, checkController.remove);
