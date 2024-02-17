@@ -7,6 +7,8 @@ import {
     allRolesAuth,
     adminOnlyAuth,
     handleValidationErrors,
+    logRequestData,
+    logValidationResults,
 } from './utils/index.js';
 
 import {
@@ -57,8 +59,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+app.use(express.json());
+app.use(cors());
+app.use('/uploads', express.static('uploads'));
+
 // media upload pathes
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', adminOnlyAuth, upload.single('image'), (req, res) => {
     res.json({
         url: `/uploads/${req.file.originalname}`,
     });
@@ -81,7 +87,7 @@ app.delete('/warehouse/delete/:id', adminOnlyAuth, wareHouseController.remove);
 app.post('/supplier/create', adminOnlyAuth, createSupplierValidation, handleValidationErrors, supplierController.create);
 app.get('/supplier', allRolesAuth, supplierController.getAll);
 app.get('/supplier/:id', allRolesAuth, supplierController.getOne);
-app.param('/supplier/update/:id', adminOnlyAuth, updateSupplierValidation, handleValidationErrors, supplierController.update);
+app.patch('/supplier/update/:id', adminOnlyAuth, updateSupplierValidation, handleValidationErrors, supplierController.update);
 app.delete('/supplier/delete/:id', adminOnlyAuth, supplierController.remove);
 
 //storage location
@@ -93,7 +99,6 @@ app.delete('/storage-location/delete/:id', adminOnlyAuth, storageLocationControl
 
 //reviews
 app.post('/review/create', allRolesAuth, createReviewValidation, handleValidationErrors, reviewController.create);
-app.get('/review', allRolesAuth, reviewController.getAll);
 app.delete('/review/delete/:id', adminOnlyAuth, reviewController.remove);
 app.patch('/review/update/:id', adminOnlyAuth, updateReviewValidation, handleValidationErrors, reviewController.update);
 
@@ -108,14 +113,15 @@ app.get('/products/category/:categoryId', allRolesAuth, productController.getByC
 //check
 app.post('/check/create', allRolesAuth, createCheckValidation, handleValidationErrors, checkController.create);
 app.get('/check', allRolesAuth, checkController.getAll);
-app.get('/checl/:id', allRolesAuth, checkController.getOne);
+app.get('/check/:id/reviews', allRolesAuth, reviewController.getAll);
+app.get('/check/:id', allRolesAuth, checkController.getOne);
 app.patch('/check/update/:id', allRolesAuth, updateCheckValidation, handleValidationErrors, checkController.update);
 app.delete('/check/delete/:id', allRolesAuth, checkController.remove);
 
 //categories
 app.post('/categories/create', adminOnlyAuth, createCategoryValidation, handleValidationErrors, categoryContoller.create);
-app.patch('/categories/:id/update', adminOnlyAuth, updateCategoryValidation, handleValidationErrors, categoryContoller.update);
-app.delete('/categories/:id/delete', adminOnlyAuth, categoryContoller.remove);
+app.patch('/categories/update/:id', adminOnlyAuth, updateCategoryValidation, handleValidationErrors, categoryContoller.update);
+app.delete('/categories/delete/:id', adminOnlyAuth, categoryContoller.remove);
 app.get('/categories/:id', allRolesAuth, categoryContoller.getOne);
 app.get('/categories', allRolesAuth, categoryContoller.getAll);
 

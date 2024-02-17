@@ -2,14 +2,14 @@ import { body, param } from 'express-validator';
 
 //auth validation
 export const loginValidation = [
-    body('phoneNumber', 'Invalid phone number format').isMobilePhone(),
+    body('phoneNumber', 'Invalid phone number format').notEmpty(),
     body('password', 'Password shoud be at least 5 symbols').isLength({ min: 5 }),
 ];
 
 export const registerValidation = [
-    body('phoneNumber', 'Invalid phone number format').isMobilePhone(),
+    body('phoneNumber', 'Invalid phone number format').notEmpty(),
     body('password', 'Password should be at least 8 symbols').isLength({ min: 8 }),
-    body('name', 'Name is required and should be at least 2 characters').isLength({ min: 2 }),
+    body('name', 'Name is too short').isLength({ min: 2 }),
     body('role', 'Invalid role').custom((value) => {
         const roles = ['manager', 'admin'];
         if (!roles.includes(value)) {
@@ -32,27 +32,27 @@ export const updateWareHouseValidation = [
 export const createSupplierValidation = [
     body('companyName', 'Company name is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
     body('address', 'Address is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
-    body('phoneNumber', 'Invalid phone number format').isMobilePhone(),
+    body('phoneNumber', 'Invalid phone number format').notEmpty(),
 ];
 
 export const updateSupplierValidation = [
     body('companyName', 'Company name should not exceed 32 characters').optional().isLength({ max: 32 }),
     body('address', 'Address should not exceed 32 characters').optional().isLength({ max: 32 }),
-    body('phoneNumber', 'Invalid phone number format').optional().isMobilePhone(),
+    body('phoneNumber', 'Invalid phone number format').optional().notEmpty(),
 ];
 
 export const createStorageLocationValidation = [
     body('shelfNumber', 'Shelf number is required and must be a number').notEmpty().isNumeric(),
-    body('wareHouse', 'Warehouse ID must be a valid MongoID').isMongoId(),
+    body('warehouse', 'Warehouse ID must be a valid MongoID').isMongoId(),
 ];
 
 export const updateStorageLocationValidation = [
     body('shelfNumber', 'Shelf number must be a number').optional().isNumeric(),
-    body('wareHouse', 'Warehouse ID must be a valid MongoID').optional().isMongoId(),
+    body('warehouse', 'Warehouse ID must be a valid MongoID').optional().isMongoId(),
 ];
 
 export const createReviewValidation = [
-    param('id', 'Invalid check ID').isMongoId(),
+    body('check', 'Invalid check ID').isMongoId(),
     body('text', 'Review text is required').notEmpty(),
 ];
 

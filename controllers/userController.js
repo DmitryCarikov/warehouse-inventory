@@ -12,8 +12,8 @@ export const register = async (req, res) => {
         const doc = new UserModel({
             phoneNumber: req.body.phoneNumber,
             name: req.body.name,
-            passwordHash: hash,
             role: req.body.role,
+            passwordHash: hash,
         });
 
         const user = await doc.save();
@@ -116,6 +116,9 @@ export const getUserById = async (req, res) => {
 
         let responseData = {
             _id: user._id,
+            name: user.name,
+            role: user.role,
+            phoneNumber: user.phoneNumber
         };
 
         res.json(responseData);

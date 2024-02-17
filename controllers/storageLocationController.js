@@ -3,9 +3,11 @@ import StorageLocationModel from '../models/storageLocation.js';
 export const create = async (req, res) => {
     try {
         const { shelfNumber } = req.body;
+        const { warehouse } = req.body;
 
         const storageLocation = new StorageLocationModel({
             shelfNumber,
+            warehouse,
         });
 
         await storageLocation.save();
@@ -51,9 +53,11 @@ export const update = async (req, res) => {
     try {
         const storageLocationId = req.params.id;
         const { shelfNumber } = req.body;
+        const { warehouse } = req.body;
 
         const updatedStorageLocation = await StorageLocationModel.findByIdAndUpdate(storageLocationId, {
             shelfNumber,
+            warehouse,
         }, { new: true });
 
         if (!updatedStorageLocation) {
