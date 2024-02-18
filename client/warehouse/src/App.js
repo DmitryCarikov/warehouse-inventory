@@ -8,6 +8,10 @@ import './App.css';
 
 import LoginPage from './components/login';
 import RegistrationPage from './components/register';
+import CategoriesPage from './components/CategoriesPage';
+import WarehousePage from './components/WareHousePage';
+import SupplierPage from './components/SupplierPage';
+import StorageLocation from './components/StorageLocation';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,10 +29,14 @@ function App() {
       <Box display="flex" flexDirection="column" minHeight="100vh">
         <Box component="main" flexGrow={1} sx={{ width: '100%' }}>
           <Routes>
-              {/* {!isAuth && <Route path='/registration' element={<RegistrationPage/>} />} */}
-              {!isAuth && <Route path='/login' element={<LoginPage/>} />}
-              {/* {isAuth && <Route path="*" element={<Navigate to="/" />} />} */}
-              {!isAuth && <Route path="*" element={<Navigate to="/login" />} />}
+            <Route path='/categories' element={<CategoriesPage></CategoriesPage>} />
+            <Route path='/warehouses' element={<WarehousePage></WarehousePage>} />
+            <Route path='/suppliers' element={<SupplierPage></SupplierPage>} />
+            <Route path='/storage-location' element={<StorageLocation></StorageLocation>} />
+            {/* {!isAuth && <Route path='/registration' element={<RegistrationPage/>} />} */}
+            {!isAuth && <Route path='/login' element={<LoginPage />} />}
+            {/* {isAuth && <Route path="*" element={<Navigate to="/" />} />} */}
+            {!isAuth && <Route path="*" element={<Navigate to="/login" />} />}
           </Routes>
         </Box>
       </Box>
