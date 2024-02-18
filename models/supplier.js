@@ -16,6 +16,7 @@ const SupplierShema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        imageUrl: String,
     },
     {
         timestamps: true,

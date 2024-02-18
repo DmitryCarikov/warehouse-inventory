@@ -2,12 +2,13 @@ import SupplierModel from '../models/supplier.js';
 
 export const create = async (req, res) => {
     try {
-        const { companyName, address, phoneNumber } = req.body;
+        const { companyName, address, phoneNumber, imageUrl } = req.body;
 
         const supplier = new SupplierModel({
             companyName,
             address,
             phoneNumber,
+            imageUrl,
         });
 
         await supplier.save();
@@ -52,12 +53,13 @@ export const getOne = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const supplierId = req.params.id;
-        const { companyName, address, phoneNumber } = req.body;
+        const { companyName, address, phoneNumber, imageUrl } = req.body;
 
         const updatedSupplier = await SupplierModel.findByIdAndUpdate(supplierId, {
             companyName,
             address,
             phoneNumber,
+            imageUrl,
         }, { new: true });
 
         if (!updatedSupplier) {
