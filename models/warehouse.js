@@ -12,6 +12,7 @@ const WareHouseSchema = new mongoose.Schema(
             required: true,
             maxlength: 32,
         },
+        imageUrl: String,
     },
     {
         timestamps: true,

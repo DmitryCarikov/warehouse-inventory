@@ -1,12 +1,13 @@
-import WareHouseModel from '../models/wareHouse.js';
+import WareHouseModel from '../models/warehouse.js';
 
 export const create = async (req, res) => {
     try {
-        const { name, address } = req.body;
+        const { name, address, imageUrl } = req.body;
 
         const wareHouse = new WareHouseModel({
             name,
             address,
+            imageUrl,
         });
 
         await wareHouse.save();
@@ -51,11 +52,12 @@ export const getOne = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const wareHouseId = req.params.id;
-        const { name, address } = req.body;
+        const { name, address, imageUrl } = req.body;
 
         const updatedWareHouse = await WareHouseModel.findByIdAndUpdate(wareHouseId, {
             name,
             address,
+            imageUrl,
         }, { new: true });
 
         if (!updatedWareHouse) {
