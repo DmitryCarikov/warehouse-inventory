@@ -7,7 +7,7 @@ const HubPage = () => {
       <h1>ХАБ ЦДО</h1>
       <ul>
         <li><Link to="/categories">Управление категориями</Link></li>
-        <li><Link to="/warehouse">Управление складами</Link></li>
+        <li><Link to="/warehouses">Управление складами</Link></li>
         <li><Link to="/suppliers">Управление поставщиками</Link></li>
         <li><Link to="/storage-location">Управление метсами хранения</Link></li>
         <li><Link to="/products">Управление товарами</Link></li>
