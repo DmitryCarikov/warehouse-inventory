@@ -7,7 +7,7 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
     return data;
 });
 
-export const fetchCategoriesById = createAsyncThunk('categories/fetchCategoriesById', async (id) => {
+export const fetchCategoryById = createAsyncThunk('categories/fetchCategoryById', async (id) => {
     const { data } = await axios.get(`/categories/${id}`);
     return data;
 });
@@ -51,15 +51,15 @@ const categoriesSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message;
             })
-            .addCase(fetchCategoriesById.pending, (state) => {
+            .addCase(fetchCategoryById.pending, (state) => {
                 state.currentCategories = null;
                 state.status = 'loading';
             })
-            .addCase(fetchCategoriesById.fulfilled, (state, action) => {
+            .addCase(fetchCategoryById.fulfilled, (state, action) => {
                 state.currentCategories = action.payload;
                 state.status = 'succeeded';
             })
-            .addCase(fetchCategoriesById.rejected, (state, action) => {
+            .addCase(fetchCategoryById.rejected, (state, action) => {
                 state.currentCategories = null;
                 state.status = 'failed';
                 state.error = action.error.message;
