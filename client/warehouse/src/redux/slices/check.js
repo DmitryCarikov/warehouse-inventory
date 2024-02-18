@@ -22,7 +22,7 @@ export const updateCheck = createAsyncThunk('checks/updateCheck', async ({ id, u
     return data;
 });
 
-export const deletechecks = createAsyncThunk('checks/deletechecks', async (id) => {
+export const deleteCheck = createAsyncThunk('checks/deleteCheck', async (id) => {
     await axios.delete(`/check/delete/${id}`);
     return id;
 });
@@ -74,7 +74,7 @@ const checksSlice = createSlice({
                     state.checks[index] = action.payload;
                 }
             })
-            .addCase(deletechecks.fulfilled, (state, action) => {
+            .addCase(deleteCheck.fulfilled, (state, action) => {
                 state.checks = state.checks.filter(employee => employee._id !== action.payload);
             });
     }

@@ -15,16 +15,16 @@ const RegistrationPage = () => {
         formState: { errors, isValid }
     } = useForm({
         defaultValues: {
-            userName: '',
+            name: '',
             phoneNumber: '',
             password: '',
-            role: 'user',
+            role: 'manager',
         },
         mode: 'onChange',
     });
 
     const onSubmit = async (values) => {
-        const completeValues = { ...values, role: 'user' };
+        const completeValues = { ...values, role: 'manager' };
         const data = await dispatch(fetchRegister(completeValues));
 
         if (!data.payload) {
@@ -46,7 +46,7 @@ const RegistrationPage = () => {
         <Container component="main" maxWidth="xs" style={{ marginTop: '30px' }}>
             <Paper elevation={3} style={{ padding: '20px' }}>
                 <Typography component="h1" variant="h5">
-                    Регистрация
+                    Регистрация для менеджера
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField
@@ -54,14 +54,14 @@ const RegistrationPage = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
+                        id="name"
                         label="Имя пользователя"
-                        name="username"
-                        autoComplete="username"
+                        name="name"
+                        autoComplete="name"
                         autoFocus
-                        error={Boolean(errors.userName?.message)}
-                        helperText={errors.userName?.message}
-                        {...register('userName', { required: 'Укажите имя', minLength: { value: 2, message: "Name is too short" } })}
+                        error={Boolean(errors.name?.message)}
+                        helperText={errors.name?.message}
+                        {...register('name', { required: 'Укажите имя', minLength: { value: 2, message: "Name is too short" } })}
                     />
                     <TextField
                         variant="outlined"

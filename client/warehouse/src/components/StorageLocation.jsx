@@ -9,12 +9,12 @@ function StorageWarehouseManager() {
   const { storageLocation } = useSelector((state) => state.storageLocation);
   const { warehouse } = useSelector((state) => state.warehouse);
   const [open, setOpen] = useState(false);
-  const [formMode, setFormMode] = useState('create'); // 'create' or 'edit'
+  const [formMode, setFormMode] = useState('create');
   const [formData, setFormData] = useState({
     shelfNumber: '',
     warehouseId: '',
   });
-  const [warehouseSearch, setWarehouseSearch] = useState(''); // State for the search term
+  const [warehouseSearch, setWarehouseSearch] = useState(''); 
 
   useEffect(() => {
     dispatch(fetchStorageLocation());
