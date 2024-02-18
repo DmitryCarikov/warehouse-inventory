@@ -22,23 +22,27 @@ export const registerValidation = [
 export const createWareHouseValidation = [
     body('name', 'Name is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
     body('address', 'Address is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
+    body('imageUrl', 'Invalid URL format for image').optional(),
 ];
 
 export const updateWareHouseValidation = [
     body('name', 'Name should not exceed 32 characters').optional().isLength({ max: 32 }),
     body('address', 'Address should not exceed 32 characters').optional().isLength({ max: 32 }),
+    body('imageUrl', 'Invalid URL format for image').optional(),
 ];
 
 export const createSupplierValidation = [
     body('companyName', 'Company name is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
     body('address', 'Address is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
     body('phoneNumber', 'Invalid phone number format').notEmpty(),
+    body('imageUrl', 'Invalid URL format for image').optional(),
 ];
 
 export const updateSupplierValidation = [
     body('companyName', 'Company name should not exceed 32 characters').optional().isLength({ max: 32 }),
     body('address', 'Address should not exceed 32 characters').optional().isLength({ max: 32 }),
     body('phoneNumber', 'Invalid phone number format').optional().notEmpty(),
+    body('imageUrl', 'Invalid URL format for image').optional(),
 ];
 
 export const createStorageLocationValidation = [
@@ -68,7 +72,7 @@ export const createProductValidation = [
     body('storageLocation', 'Storage location ID must be a valid MongoID').optional().isMongoId(),
     body('suplier', 'Supplier ID must be a valid MongoID').optional().isMongoId(),
     body('wareHouse', 'Warehouse ID must be a valid MongoID').optional().isMongoId(),
-    body('imageUrl', 'Invalid URL format for image').optional().isURL(),
+    body('imageUrl', 'Invalid URL format for image').optional(),
     body('categories', 'Categories must be an array').optional().isArray(),
     body('categories.*', 'Invalid category ID').optional().isMongoId(),
 ];
@@ -81,7 +85,7 @@ export const updateProductValidation = [
     body('storageLocation', 'Storage location ID must be a valid MongoID').optional().isMongoId(),
     body('suplier', 'Supplier ID must be a valid MongoID').optional().isMongoId(),
     body('wareHouse', 'Warehouse ID must be a valid MongoID').optional().isMongoId(),
-    body('imageUrl', 'Invalid URL format for image').optional().isURL(),
+    body('imageUrl', 'Invalid URL format for image').optional(),
     body('categories', 'Categories must be an array').optional().isArray(),
     body('categories.*', 'Invalid category ID').optional().isMongoId(),
 ];
