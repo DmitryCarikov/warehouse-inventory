@@ -32,15 +32,15 @@ export const updateWareHouseValidation = [
 ];
 
 export const createSupplierValidation = [
-    body('companyName', 'Company name is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
-    body('address', 'Address is required and should not exceed 32 characters').notEmpty().isLength({ max: 32 }),
+    body('companyName', 'Company name is required and should not exceed 32 characters').notEmpty().isLength({ max: 132 }),
+    body('address', 'Address is required and should not exceed 32 characters').notEmpty().isLength({ max: 132 }),
     body('phoneNumber', 'Invalid phone number format').notEmpty(),
     body('imageUrl', 'Invalid URL format for image').optional(),
 ];
 
 export const updateSupplierValidation = [
-    body('companyName', 'Company name should not exceed 32 characters').optional().isLength({ max: 32 }),
-    body('address', 'Address should not exceed 32 characters').optional().isLength({ max: 32 }),
+    body('companyName', 'Company name should not exceed 32 characters').optional().isLength({ max: 132 }),
+    body('address', 'Address should not exceed 32 characters').optional().isLength({ max: 132 }),
     body('phoneNumber', 'Invalid phone number format').optional().notEmpty(),
     body('imageUrl', 'Invalid URL format for image').optional(),
 ];

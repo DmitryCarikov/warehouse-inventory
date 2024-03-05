@@ -5,12 +5,12 @@ const SupplierShema = new mongoose.Schema(
         companyName: {
             type: String,
             required: true,
-            maxlength: 32,
+            maxlength: 132,
         },
         address: {
             type: String,
             required: true,
-            maxlength: 32,
+            maxlength: 132,
         },
         phoneNumber: {
             type: String,

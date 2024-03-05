@@ -112,7 +112,7 @@ const SupplierPage = () => {
 
             {/* Dialog for Creating a New Supplier */}
             <Dialog open={openCreateDialog} onClose={handleCloseCreateDialog}>
-                <DialogTitle>Добавить склад</DialogTitle>
+                <DialogTitle>Добавить поставщика</DialogTitle>
                 <DialogContent>
                     <TextField
                         name="companyName" // Убедитесь, что `name` правильно установлен
