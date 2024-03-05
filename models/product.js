@@ -37,7 +37,7 @@ const ProductSchema = new mongoose.Schema(
         },
         wareHouse: {
             type: Schema.Types.ObjectId,
-            red: 'WareHouse',
+            ref: 'WareHouse',
         }
     },
     {
