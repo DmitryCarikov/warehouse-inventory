@@ -94,7 +94,7 @@ app.post('/supplier/create', adminOnlyAuth, createSupplierValidation, handleVali
 app.get('/supplier', allRolesAuth, supplierController.getAll);
 app.get('/supplier/:id', allRolesAuth, supplierController.getOne);
 app.patch('/supplier/update/:id', adminOnlyAuth, updateSupplierValidation, handleValidationErrors, supplierController.update);
-app.delete('/supplier/delete/:id', adminOnlyAuth, supplierController.remove);
+app.delete('/supplier/delete/:id', adminOnlyAuth, supplierController.remove);   
 
 //storage location
 app.post('/storage-location/create', adminOnlyAuth, createStorageLocationValidation, handleValidationErrors, storageLocationController.create);
@@ -109,7 +109,7 @@ app.delete('/review/delete/:id', adminOnlyAuth, reviewController.remove);
 app.get('/check/:id/reviews', allRolesAuth, reviewController.getAll);
 app.patch('/review/update/:id', adminOnlyAuth, updateReviewValidation, handleValidationErrors, reviewController.update);
 
-//prodocts
+//prodocts  
 app.post('/products/create', allRolesAuth, createProductValidation, handleValidationErrors, productController.create);
 app.patch('/products/update/:id', allRolesAuth, updateProductValidation, handleValidationErrors, productController.update);
 app.delete('/products/delete/:id', allRolesAuth, productController.remove);
@@ -129,7 +129,7 @@ app.post('/categories/create', adminOnlyAuth, createCategoryValidation, handleVa
 app.patch('/categories/update/:id', adminOnlyAuth, updateCategoryValidation, handleValidationErrors, categoryContoller.update);
 app.delete('/categories/delete/:id', adminOnlyAuth, categoryContoller.remove);
 app.get('/categories/:id', allRolesAuth, categoryContoller.getOne);
-app.get('/categories', allRolesAuth, categoryContoller.getAll);
+app.get('/categories', allRolesAuth, categoryContoller.getAll); 
 
 app.listen(4444, (err) => {
     if (err) {
