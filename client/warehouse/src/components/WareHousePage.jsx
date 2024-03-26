@@ -12,6 +12,8 @@ const WarehousePage = () => {
     const [currentWarehouse, setCurrentWarehouse] = useState(null);
     const [NewWarehouse, setNewWarehouse] = useState({ name: '', address: '', imageUrl: '' });
     const [imageFile, setImageFile] = useState(null);
+    const [searchName, setSearchName] = useState('');
+    const [searchAddress, setSearchAddress] = useState('');
 
     useEffect(() => {
         dispatch(fetchWarehouse());
@@ -81,12 +83,37 @@ const WarehousePage = () => {
         }
     };
 
+    const filteredWarehouses = warehouses.filter(warehouse =>
+        warehouse.name.toLowerCase().includes(searchName.toLowerCase()) &&
+        warehouse.address.toLowerCase().includes(searchAddress.toLowerCase())
+    );
+
     return (
         <div>
             <Typography variant="h4" gutterBottom>Управление складами</Typography>
             <Button color="primary" onClick={handleOpenCreateDialog}>Добавить склад</Button>
+            <Grid container spacing={2} alignItems="center" style={{ margin: '20px 0' }}>
+                <Grid item xs={6}>
+                    <TextField
+                        label="Поиск по названию"
+                        variant="outlined"
+                        fullWidth
+                        value={searchName}
+                        onChange={(e) => setSearchName(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <TextField
+                        label="Поиск по адресу"
+                        variant="outlined"
+                        fullWidth
+                        value={searchAddress}
+                        onChange={(e) => setSearchAddress(e.target.value)}
+                    />
+                </Grid>
+            </Grid>
             <Grid container spacing={3}>
-                {warehouses.map(warehouse => (
+                {filteredWarehouses.map(warehouse => (
                     <Grid item key={warehouse._id} xs={12} sm={6} md={4}>
                         <Card>
                             <CardMedia

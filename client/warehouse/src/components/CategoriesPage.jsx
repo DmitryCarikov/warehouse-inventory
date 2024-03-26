@@ -11,7 +11,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
-  Grid // Импортируем Grid для более гибкой верстки
+  Grid
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -19,7 +19,9 @@ const CategoriesPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories.categories);
   const [newCategoryName, setNewCategoryName] = useState('');
-  const [newCategoryDescription, setNewCategoryDescription] = useState(''); // Новое состояние для описания
+  const [newCategoryDescription, setNewCategoryDescription] = useState('');
+  const [searchName, setSearchName] = useState(''); // Состояние для поиска по названию
+  const [searchDescription, setSearchDescription] = useState(''); // Состояние для поиска по описанию
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -27,10 +29,9 @@ const CategoriesPage = () => {
 
   const handleAddCategory = () => {
     if (newCategoryName.trim() !== '') {
-      // Теперь отправляем и описание вместе с названием
       dispatch(createCategory({ name: newCategoryName, description: newCategoryDescription }));
       setNewCategoryName('');
-      setNewCategoryDescription(''); // Сбрасываем описание
+      setNewCategoryDescription('');
     }
   };
 
@@ -38,11 +39,34 @@ const CategoriesPage = () => {
     dispatch(deleteCategory(categoryId));
   };
 
+  // Фильтрация категорий по названию и описанию
+  const filteredCategories = categories.filter(category => {
+    return category.name.toLowerCase().includes(searchName.toLowerCase()) &&
+      category.description.toLowerCase().includes(searchDescription.toLowerCase());
+  });
+
   return (
     <Container>
       <Typography variant="h4" style={{ margin: '20px 0' }}>Управление категориями</Typography>
 
       <Grid container spacing={2} alignItems="center">
+        <Grid item>
+          <TextField
+            label="Поиск по названию"
+            value={searchName}
+            onChange={(e) => setSearchName(e.target.value)}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            label="Поиск по описанию"
+            value={searchDescription}
+            onChange={(e) => setSearchDescription(e.target.value)}
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={2} alignItems="center" style={{ margin: '20px 0' }}>
         <Grid item>
           <TextField
             label="Название новой категории"
@@ -55,8 +79,8 @@ const CategoriesPage = () => {
             label="Описание новой категории"
             value={newCategoryDescription}
             onChange={(e) => setNewCategoryDescription(e.target.value)}
-            multiline // Позволяет вводить многострочный текст
-            rows={2} // Количество строк по умолчанию
+            multiline
+            rows={2}
           />
         </Grid>
         <Grid item>
@@ -71,11 +95,11 @@ const CategoriesPage = () => {
       </Grid>
 
       <List>
-        {categories.map((category) => (
+        {filteredCategories.map((category) => (
           <ListItem key={category._id}>
             <ListItemText
               primary={category.name}
-              secondary={category.description} // Отображаем описание, если оно есть
+              secondary={category.description}
             />
             <ListItemSecondaryAction>
               <IconButton

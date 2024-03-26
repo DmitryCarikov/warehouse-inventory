@@ -16,6 +16,8 @@ const ChecksPage = () => {
   const [currentCheckId, setCurrentCheckId] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [reviewText, setReviewText] = useState("");
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   useEffect(() => {
     dispatch(fetchChecks());
@@ -27,11 +29,11 @@ const ChecksPage = () => {
 
   const handleOpenCheckDialog = (checkId = null) => {
     setOpenCheckDialog(true);
-    if(checkId) {
+    if (checkId) {
       setEditMode(true);
       setCurrentCheckId(checkId);
       const check = checks.find(check => check._id === checkId);
-      if(check) {
+      if (check) {
         setSelectedProducts(check.products);
       }
     } else {
@@ -44,7 +46,7 @@ const ChecksPage = () => {
 
   const handleAddOrUpdateCheck = () => {
     const checkData = { products: selectedProducts.map(product => product._id) };
-    if(editMode) {
+    if (editMode) {
       dispatch(updateCheck({ id: currentCheckId, updatedData: checkData }));
     } else {
       dispatch(createCheck(checkData));
@@ -82,10 +84,38 @@ const ChecksPage = () => {
     dispatch(deleteReview(reviewId));
   };
 
+  const filteredChecks = checks.filter(check => {
+    const checkDate = new Date(check.createdAt).getTime();
+    const start = startDate ? new Date(startDate).getTime() : null;
+    const end = endDate ? new Date(endDate).getTime() : null;
+    return (!start || checkDate >= start) && (!end || checkDate <= end);
+  });
+
   return (
     <div>
-      <Button variant="contained" onClick={() => handleOpenCheckDialog()}>Add New Check</Button>
-      {checks.map((check) => (
+      <Typography variant="h4" gutterBottom>Управление проверками</Typography>
+      <Button variant="contained" onClick={() => handleOpenCheckDialog()}>Добавить новый чек</Button>
+
+      <TextField
+        label="Дата начала"
+        type="date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <TextField
+        label="Дата конца"
+        type="date"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      
+      {filteredChecks.map((check) => (
         <div key={check._id}>
           <TableContainer component={Paper} style={{ marginTop: 20 }}>
             <Typography variant="h6" style={{ margin: 20 }}>Check ID: {check._id}</Typography>

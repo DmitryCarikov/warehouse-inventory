@@ -33,6 +33,9 @@ const ProductsPage = () => {
     const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '', amount: '', categories: [], storageLocation: '', supplier: '', warehouse: '', imageUrl: '' });
     const [imageFile, setImageFile] = useState(null);
 
+    const [searchName, setSearchName] = useState('');
+    const [searchDescription, setSearchDescription] = useState('');
+
     useEffect(() => {
         dispatch(fetchProducts());
         dispatch(fetchCategories());
@@ -109,12 +112,33 @@ const ProductsPage = () => {
         handleCloseDialog();
     };
 
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchName.toLowerCase()) &&
+        product.description.toLowerCase().includes(searchDescription.toLowerCase())
+    );
+
     return (
         <div>
             <Typography variant="h4" gutterBottom>Управление товарами</Typography>
             <Button color="primary" onClick={() => handleOpenDialog(null)}>Добавить товар</Button>
+            <TextField
+                label="Поиск по названию"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={searchName}
+                onChange={(e) => setSearchName(e.target.value)}
+            />
+            <TextField
+                label="Поиск по описанию"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={searchDescription}
+                onChange={(e) => setSearchDescription(e.target.value)}
+            />
             <Grid container spacing={3}>
-                {products.map(product => (
+                {filteredProducts.map(product => (
                     <Grid item key={product._id} xs={12} sm={6} md={4}>
                         <Card>
                             <CardMedia

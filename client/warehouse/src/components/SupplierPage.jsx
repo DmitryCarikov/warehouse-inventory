@@ -12,6 +12,9 @@ const SupplierPage = () => {
     const [currentSupplier, setCurrentSupplier] = useState(null);
     const [NewSupplier, setNewSupplier] = useState({ companyName: '', address: '', imageUrl: '', phoneNumber: '' });
     const [imageFile, setImageFile] = useState(null);
+    const [searchName, setSearchName] = useState('');
+    const [searchAddress, setSearchAddress] = useState('');
+    const [searchPhoneNumber, setSearchPhoneNumber] = useState('');
 
     useEffect(() => {
         dispatch(fetchSupplier());
@@ -84,12 +87,47 @@ const SupplierPage = () => {
         }
     };
 
+    const filteredSuppliers = suppliers.filter(supplier =>
+        supplier.companyName.toLowerCase().includes(searchName.toLowerCase()) &&
+        supplier.address.toLowerCase().includes(searchAddress.toLowerCase()) &&
+        supplier.phoneNumber.includes(searchPhoneNumber) // предполагается, что номер телефона - строка
+    );
+
     return (
         <div>
             <Typography variant="h4" gutterBottom>Управление поставщиками</Typography>
             <Button color="primary" onClick={handleOpenCreateDialog}>Добавить поставщика</Button>
+            <Grid container spacing={2} alignItems="center" style={{ marginTop: 20, marginBottom: 20 }}>
+                <Grid item xs={4}>
+                    <TextField
+                        label="Поиск по названию компании"
+                        variant="outlined"
+                        fullWidth
+                        value={searchName}
+                        onChange={(e) => setSearchName(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <TextField
+                        label="Поиск по адресу"
+                        variant="outlined"
+                        fullWidth
+                        value={searchAddress}
+                        onChange={(e) => setSearchAddress(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <TextField
+                        label="Поиск по номеру телефона"
+                        variant="outlined"
+                        fullWidth
+                        value={searchPhoneNumber}
+                        onChange={(e) => setSearchPhoneNumber(e.target.value)}
+                    />
+                </Grid>
+            </Grid>
             <Grid container spacing={3}>
-                {suppliers.map(Supplier => (
+                {filteredSuppliers.map(Supplier => (
                     <Grid item key={Supplier._id} xs={12} sm={6} md={4}>
                         <Card>
                             <CardMedia
@@ -165,7 +203,7 @@ const SupplierPage = () => {
                     <TextField
                         autoFocus
                         margin="dense"
-                        name="companyName" 
+                        name="companyName"
                         label="Название"
                         type="text"
                         fullWidth
@@ -175,7 +213,7 @@ const SupplierPage = () => {
                     />
                     <TextField
                         margin="dense"
-                        name="address" 
+                        name="address"
                         label="Адрес"
                         type="text"
                         fullWidth
@@ -187,7 +225,7 @@ const SupplierPage = () => {
                     />
                     <TextField
                         margin="dense"
-                        name="phoneNumber" 
+                        name="phoneNumber"
                         label="Номер телефона"
                         type="text"
                         fullWidth
