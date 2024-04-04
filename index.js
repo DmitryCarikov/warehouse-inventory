@@ -42,14 +42,9 @@ import {
 } from './validations.js'
 
 mongoose
-    .connect('mongodb+srv://admin:Hesus2016@cluster0.vgtv5yo.mongodb.net/WareHouse')
+    .connect('mongodb+srv://dimacarikov:hehehe@cluster0.orkhxfy.mongodb.net/WareHouse')
     .then(() => console.log('DB OK'))
     .catch((err) => console.log('DB ERROR', err));
-
-// mongoose
-//     .connect('mongodb+srv://dimacarikov:hehehe@cluster0.orkhxfy.mongodb.net/WareHouse')
-//     .then(() => console.log('DB OK'))
-//     .catch((err) => console.log('DB ERROR', err));
 
 
 const app = express();
